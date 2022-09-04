@@ -16,46 +16,15 @@ int max (int a, int b) {
 }
 
 //Declare your rectangle structure here!
-struct rect_t{
-  int x;
-  int y;
-  int width;
-  int height;
-};
-typedef struct rect_t rectangle;
+
 
 rectangle canonicalize(rectangle r) {
   //WRITE THIS FUNCTION
-  if(r.width < 0){
-    r.x = r.x + r.width;
-    r.width = -r.width;
-  }
-  if(r.height < 0){     
-    r.y = r.y + r.height;
-   r.height = -r.height;
-  }
   return r;
 }
 rectangle intersection(rectangle r1, rectangle r2) {
   //WRITE THIS FUNCTION
-  rectangle r3;
-  rectangle r4;
-  r4.width = 0;
-  r4.height = 0;
-  r1 = canonicalize(r1);
-  r2 = canonicalize(r2);
-  r3.x = max(r1.x, r2.x);
-  r3.width = min(r1.x+r1.width,r2.x+r2.width)-r3.x;
-  r3.y = max(r1.y, r2.y);                          
-  r3.height = min(r1.y+r1.height,r2.y+r2.height)-r3.y;
-  r3 = canonicalize(r3);
-
-  if(((r1.x > r2.x+r2.width)||(r2.x > r1.x+r1.width)) ||
-     ((r1.y > r2.y+r2.height)|| (r2.y>r1.y+r1.height))){
-    return r4;
-  }
-  
-  return r3;
+  return r1;
 }
 
 //You should not need to modify any code below this line
@@ -89,7 +58,7 @@ int main (void) {
   r2.height = -7;
   printf("r2 is ");
   printRectangle(r2);
-  
+
   r3.x = -2;
   r3.y = 7;
   r3.width = 7;
@@ -112,7 +81,7 @@ int main (void) {
   i = intersection(r1,r2);
   printf("intersection(r1,r2): ");
   printRectangle(i);
-  
+
   i = intersection(r1,r3);
   printf("intersection(r1,r3): ");
   printRectangle(i);
@@ -129,7 +98,7 @@ int main (void) {
   i = intersection(r2,r2);
   printf("intersection(r2,r2): ");
   printRectangle(i);
-  
+
   i = intersection(r2,r3);
   printf("intersection(r2,r3): ");
   printRectangle(i);
@@ -146,7 +115,7 @@ int main (void) {
   i = intersection(r3,r2);
   printf("intersection(r3,r2): ");
   printRectangle(i);
-  
+
   i = intersection(r3,r3);
   printf("intersection(r3,r3): ");
   printRectangle(i);
@@ -163,7 +132,7 @@ int main (void) {
   i = intersection(r4,r2);
   printf("intersection(r4,r2): ");
   printRectangle(i);
-  
+
   i = intersection(r4,r3);
   printf("intersection(r4,r3): ");
   printRectangle(i);
