@@ -27,7 +27,12 @@ typedef struct rectangle_t {
 } rectangle;
 
 rectangle canonicalize(rectangle r) {
-  //WRITE THIS FUNCTION
+  // canonicalize x axis using canonicalize_axis(r.x, r.width)
+  canonicalize_axis(&r->x, &r->width);
+
+
+
+  // RETURN r
   return r;
 }
 rectangle intersection(rectangle r1, rectangle r2) {
