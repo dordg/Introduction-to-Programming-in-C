@@ -26,15 +26,52 @@ typedef struct rectangle_t {
   int height;
 } rectangle;
 
+void canonicalize_axis(int * ptr_coord, int * ptr_length) {
+  if(*ptr_length < 0) {
+    *ptr_coord += *ptr_length;
+    *ptr_length *= -1;
+  }
+}
+
 rectangle canonicalize(rectangle r) {
   // canonicalize x axis using canonicalize_axis(r.x, r.width)
   canonicalize_axis(&r->x, &r->width);
 
-
+  // canonicalize y axis using canonicalize_axis(r.y, r.height)
+  canonicalize_axis(&r->y, &r->height);
 
   // RETURN r
   return r;
 }
+
+int next_coord(coord, length) {
+  return coord + length;
+}
+
+void axis_intersection(int * ptr_coord1, int * ptr_length1, int * ptr_coord2,int * ptr_length2, int * ptr_ri_coord, int * ptr_ri_length) {
+  //set ri_coord to the max of coord1 and coord2 using max(coord1, coord2)
+  *ptr_ri_coord = max(*ptr_coord1, *ptr_coord2);
+
+  // set next_coord1 using next_coord(coord1, length1)
+  int next_coord1 = next_coord(*ptr_coord1, *ptr_length1);
+
+  //set next_coord2 using next_coord(coord2, length2)
+  int next_coord2 = next_coord(*ptr_coord2, *ptr_length2);
+
+  //set ri_next_coord using min(next_coord1, next_coord2)
+  int ri_next_coord = min(next_coord1, next_coord2);
+
+  //set ri_length to ri_next_coord - ri_coord
+  *ptr_ri_length = ri_next_coord - *ptr_ri_coord;
+
+  //IF ri_length < 0:
+  if(*ptr_ri_length < 0) {
+    //set ri_length to 0
+    *ptr_ri_length = 0;
+  }
+
+}
+
 rectangle intersection(rectangle r1, rectangle r2) {
   // canonicalize r1 using canonicalize(r1) 
   r1 = canonicalize(r1);
