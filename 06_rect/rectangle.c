@@ -1,13 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 //I've provided "min" and "max" functions in
 //case they are useful to you
+
 int min (int a, int b) {
   if (a < b) {
     return a;
   }
   return b;
 }
+
 int max (int a, int b) {
   if (a > b) {
     return a;
@@ -16,15 +19,35 @@ int max (int a, int b) {
 }
 
 //Declare your rectangle structure here!
-
+typedef struct rectangle_t {
+  int x;
+  int y;
+  int width;
+  int height;
+} rectangle;
 
 rectangle canonicalize(rectangle r) {
   //WRITE THIS FUNCTION
   return r;
 }
 rectangle intersection(rectangle r1, rectangle r2) {
-  //WRITE THIS FUNCTION
-  return r1;
+  // canonicalize r1 using canonicalize(r1) 
+  r1 = canonicalize(r1);
+
+  // canonicalize r2 using canonicalizer(r2)
+  r2 = canonicalize(r2);
+
+  // declare rectangles' intersection as ri
+  rectangle ri;
+
+  // set ri's x axis intersection using axis_intersection
+  axis_intersection(&r1->x, &r1->width, &r2->x, &r2->width, &ri->x, &ri->width);
+
+  // set ri's y axis intersection using axis_intersection
+  axis_intersection(&r1->y, &r1->length, &r2->y, &r2->length, &ri->y, &ri->length);
+
+  // RETURN ri
+  return ri;
 }
 
 //You should not need to modify any code below this line
