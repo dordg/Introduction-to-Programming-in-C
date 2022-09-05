@@ -35,16 +35,16 @@ void canonicalize_axis(int * ptr_coord, int * ptr_length) {
 
 rectangle canonicalize(rectangle r) {
   // canonicalize x axis using canonicalize_axis(r.x, r.width)
-  canonicalize_axis(&r->x, &r->width);
+  canonicalize_axis(&(r.x), &(r.width));
 
   // canonicalize y axis using canonicalize_axis(r.y, r.height)
-  canonicalize_axis(&r->y, &r->height);
+  canonicalize_axis(&(r.y), &(r.height));
 
   // RETURN r
   return r;
 }
 
-int next_coord(coord, length) {
+int next_coord(int coord, int length) {
   return coord + length;
 }
 
@@ -64,12 +64,6 @@ void axis_intersection(int * ptr_coord1, int * ptr_length1, int * ptr_coord2,int
   //set ri_length to ri_next_coord - ri_coord
   *ptr_ri_length = ri_next_coord - *ptr_ri_coord;
 
-  //IF ri_length < 0:
-  if(*ptr_ri_length < 0) {
-    //set ri_length to 0
-    *ptr_ri_length = 0;
-  }
-
 }
 
 rectangle intersection(rectangle r1, rectangle r2) {
@@ -83,10 +77,16 @@ rectangle intersection(rectangle r1, rectangle r2) {
   rectangle ri;
 
   // set ri's x axis intersection using axis_intersection
-  axis_intersection(&r1->x, &r1->width, &r2->x, &r2->width, &ri->x, &ri->width);
+  axis_intersection(&(r1.x), &(r1.width), &(r2.x), &(r2.width), &(ri.x), &(ri.width));
 
   // set ri's y axis intersection using axis_intersection
-  axis_intersection(&r1->y, &r1->length, &r2->y, &r2->length, &ri->y, &ri->length);
+  axis_intersection(&(r1.y), &(r1.height), &(r2.y), &(r2.height), &(ri.y), &(ri.height));
+
+  // IF ri's width or length < 0 there is no intersection:
+  if(ri.width < 0 || ri.height < 0) {
+    ri.width = 0;
+    ri.height = 0;
+  }
 
   // RETURN ri
   return ri;
