@@ -23,7 +23,7 @@ int main(void) {
     return EXIT_FAILURE;
   }
   printf("Correct! You win round1!\n");
-  
+
   int total = 0;
   for (int i = 0; i <= 5678; i++) {
     total = total ^ getOtherSN(i);
