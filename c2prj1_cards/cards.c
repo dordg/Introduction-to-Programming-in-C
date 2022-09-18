@@ -20,7 +20,7 @@ char value_letter(card_t c) {
 
 char suit_letter(card_t c) {
   return 'x';
-  
+
 }
 
 void print_card(card_t c) {
