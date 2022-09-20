@@ -29,10 +29,14 @@ typedef enum {
   NOTHING
 } hand_ranking_t;
 card_t card_from_num(unsigned c);
+char num_to_value(unsigned c);
+char num_to_suit(unsigned c); 
 void assert_card_valid(card_t c);
 const char * ranking_to_string(hand_ranking_t r) ;
 char value_letter(card_t c);
 char suit_letter(card_t c) ;
 void print_card(card_t c);
 card_t card_from_letters(char value_let, char suit_let);
+char let_to_value(char value_let);
+char let_to_suit(char suit_let); 
 #endif

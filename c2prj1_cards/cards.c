@@ -33,6 +33,8 @@ const char * ranking_to_string(hand_ranking_t r) {
             return "Pair";
         case NOTHING:
             return "Nothing";
+        default:
+            return "No such combination";
     }
 }
 
@@ -47,10 +49,10 @@ char value_letter(card_t c) {
             return 'Q';
         case VALUE_JACK:
             return 'J';
+        case 10:
+            return '0';
         default:
-            // Includes the case where value is 10 but return '0'
-            // 48 is '0' ascii value
-            return 48 + (c.value % 10);
+            return 48 + c.value;
     }
 }
 
@@ -65,12 +67,14 @@ char suit_letter(card_t c) {
             return 'd';
         case CLUBS:
             return 'c';
+        default:
+            return '?';
     }
 }
 
 // Prints c
 void print_card(card_t c) {
-    printf("%c%c", value_letter(c.value), suit_letter(c.suit));
+    printf("%c%c", value_letter(c), suit_letter(c));
 }
 
 // Creates a card_t from the given letters and returns it
@@ -78,6 +82,7 @@ card_t card_from_letters(char value_let, char suit_let) {
   card_t temp;
   temp.value = let_to_value(value_let);
   temp.suit = let_to_suit(suit_let);
+  assert_card_valid(temp);
   return temp;
 }
 
@@ -111,6 +116,9 @@ char let_to_suit(char suit_let) {
             return DIAMONDS;
         case 'c':
             return CLUBS;
+        default:
+            // Should only return in case of sn invalid letter
+            return NUM_SUITS;
     }
 }
 
@@ -129,5 +137,5 @@ char num_to_value(unsigned c) {
 
 // Returns c's corresponding suit
 char num_to_suit(unsigned c) {
-    return num / 13;
+    return c / 13;
 }
