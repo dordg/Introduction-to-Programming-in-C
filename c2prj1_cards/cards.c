@@ -82,7 +82,7 @@ card_t card_from_letters(char value_let, char suit_let) {
 }
 
 // Returns value_let's numeric value
-int let_to_value(char value_let) {
+char let_to_value(char value_let) {
     switch (value_let) {
         case 'A':
             return VALUE_ACE;
@@ -101,7 +101,7 @@ int let_to_value(char value_let) {
 }
 
 // Returns suit_let's numric value
-int let_to_suit(char suit_let) {
+char let_to_suit(char suit_let) {
     switch (suit_let) {
         case 's':
             return SPADES;
@@ -114,7 +114,20 @@ int let_to_suit(char suit_let) {
     }
 }
 
+// Returns card_t corresponding to c
 card_t card_from_num(unsigned c) {
   card_t temp;
+  temp.value = num_to_value(c);
+  temp.suit = num_to_suit(c);
   return temp;
+}
+
+// Returns c's corresponding value
+char num_to_value(unsigned c) {
+    return (c % 13) + 2;
+}
+
+// Returns c's corresponding suit
+char num_to_suit(unsigned c) {
+    return num / 13;
 }
