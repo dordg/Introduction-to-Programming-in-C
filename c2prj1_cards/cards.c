@@ -3,14 +3,36 @@
 #include <stdlib.h>
 #include "cards.h"
 
-
+/* validates card_t:
+ * Asserts if card_t.value is between 2 and ACE
+ * Asserts if card_t.suit is between ACE and SPADES (suit is an Enum)
+ */
 void assert_card_valid(card_t c) {
-
-
+    assert(c.value >= 2 && c.value <= VALUE_ACE);
+    assert(c.suit >= SPADES && c.suit <= CLUBS);
 }
 
 const char * ranking_to_string(hand_ranking_t r) {
-  return "";
+    switch(r) {
+        case STRAIGHT_FLUSH:
+            return "Straight flush";
+        case FOUR_OF_A_KIND:
+            return "Four of a kind";
+        case FULL_HOUSE:
+            return "Full house";
+        case FLUSH:
+            return "Flush";
+        case STRAIGHT:
+            return "Straight";
+        case THREE_OF_A_KIND:
+            return "Three of a kind";
+        case TWO_PAIR:
+            return "Two pair";
+        case PAIR:
+            return "Pair";
+        case NOTHING:
+            return "Nothing";
+    }
 }
 
 char value_letter(card_t c) {
