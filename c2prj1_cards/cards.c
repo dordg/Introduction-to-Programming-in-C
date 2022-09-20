@@ -12,6 +12,7 @@ void assert_card_valid(card_t c) {
     assert(c.suit >= SPADES && c.suit <= CLUBS);
 }
 
+// Returns the string corresponding to r's value
 const char * ranking_to_string(hand_ranking_t r) {
     switch(r) {
         case STRAIGHT_FLUSH:
@@ -35,10 +36,22 @@ const char * ranking_to_string(hand_ranking_t r) {
     }
 }
 
+// Returns the letter corresponding to c.value
 char value_letter(card_t c) {
-  return 'x';
+    switch(c.value) {
+        case VALUE_ACE:
+            return 'A';
+        case VALUE_KING:
+            return 'K';
+        case VALUE_QUEEN:
+            return 'Q';
+        case VALUE_JACK:
+            return 'J';
+        default:
+            // Includes the case where value is 10 but return '0'
+            return 48 + (c.value % 10);
+    }
 }
-
 
 char suit_letter(card_t c) {
   return 'x';
