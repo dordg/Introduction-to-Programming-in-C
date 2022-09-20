@@ -49,6 +49,7 @@ char value_letter(card_t c) {
             return 'J';
         default:
             // Includes the case where value is 10 but return '0'
+            // 48 is '0' ascii value
             return 48 + (c.value % 10);
     }
 }
@@ -72,9 +73,45 @@ void print_card(card_t c) {
     printf("%c%c", value_letter(c.value), suit_letter(c.suit));
 }
 
+// Creates a card_t from the given letters and returns it
 card_t card_from_letters(char value_let, char suit_let) {
   card_t temp;
+  temp.value = let_to_value(value_let);
+  temp.suit = let_to_suit(suit_let);
   return temp;
+}
+
+// Returns value_let's numeric value
+int let_to_value(char value_let) {
+    switch (value_let) {
+        case 'A':
+            return VALUE_ACE;
+        case 'K':
+            return VALUE_KING;
+        case 'Q':
+            return VALUE_QUEEN;
+        case 'J':
+            return VALUE_JACK;
+        case '0':
+            return 10;
+        default:
+            // 48 is '0' ascii value
+            return value_let - 48;
+    }
+}
+
+// Returns suit_let's numric value
+int let_to_suit(char suit_let) {
+    switch (suit_let) {
+        case 's':
+            return SPADES;
+        case 'h':
+            return HEARTS;
+        case 'd':
+            return DIAMONDS;
+        case 'c':
+            return CLUBS;
+    }
 }
 
 card_t card_from_num(unsigned c) {
