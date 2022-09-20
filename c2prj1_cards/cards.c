@@ -14,7 +14,7 @@ void assert_card_valid(card_t c) {
 
 // Returns the string corresponding to r's value
 const char * ranking_to_string(hand_ranking_t r) {
-    switch(r) {
+    switch (r) {
         case STRAIGHT_FLUSH:
             return "Straight flush";
         case FOUR_OF_A_KIND:
@@ -38,7 +38,7 @@ const char * ranking_to_string(hand_ranking_t r) {
 
 // Returns the letter corresponding to c.value
 char value_letter(card_t c) {
-    switch(c.value) {
+    switch (c.value) {
         case VALUE_ACE:
             return 'A';
         case VALUE_KING:
@@ -53,9 +53,18 @@ char value_letter(card_t c) {
     }
 }
 
+// Returns the letter corresponding to c.suit
 char suit_letter(card_t c) {
-  return 'x';
-
+    switch (c.suit) {
+        case SPADES:
+            return 's';
+        case HEARTS:
+            return 'h';
+        case DIAMONDS:
+            return 'd';
+        case CLUBS:
+            return 'c';
+    }
 }
 
 void print_card(card_t c) {
