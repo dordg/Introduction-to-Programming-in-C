@@ -52,7 +52,7 @@ char value_letter(card_t c) {
         case 10:
             return '0';
         default:
-            return 48 + c.value;
+            return '0' + c.value;
     }
 }
 
@@ -100,8 +100,7 @@ char let_to_value(char value_let) {
         case '0':
             return 10;
         default:
-            // 48 is '0' ascii value
-            return value_let - 48;
+            return value_let - '0';
     }
 }
 
