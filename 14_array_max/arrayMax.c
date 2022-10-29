@@ -2,16 +2,19 @@
 #include <stdlib.h>
 
 int * arrayMax(int * array, int n) {
-  if (n==0)  return NULL;
-  int *p = array;
-  int max = *p;
-  for(int i=1; i<n; i++){
-    if(array[i] > max){
-      max = array[i];
-      p = &array[i];
-    }
+  if (n <= 0) { return NULL; }
+  
+  int largest_element = array[0];
+  int * p_largest_element = array;
+
+  for (int i = 1; i < n; i++) {
+    if (array[i] > largest_element) {
+      largest_element = array[i];
+      p_largest_element = &array[i];
+    }       
   }
-  return p;
+
+  return p_largest_element;
 }
 
 void doTest(int * array, int n) {
@@ -49,6 +52,6 @@ int main(void) {
   doTest (array3, 6);
   doTest (NULL, 0);
   doTest (array1, 0);
-  
+
   return EXIT_SUCCESS;
 }
